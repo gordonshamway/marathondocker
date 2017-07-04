@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password1
+    ports:
+      - "1432:1433"
+  db_setup:
+    build: .
+    command: sh ./entrypoint.sh
+    depends_on:
+      - db
